@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>CricInfo</title>
+    <style>
+        .card-container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+        }
+
+        .card {
+            flex-basis: 30%;
+            margin-bottom: 20px;
+            border: 1px solid #e8e8e8;
+            border-radius: 5px;
+            background-color: #f7f7f7;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            padding: 20px;
+            transition: all 0.3s ease;
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        .card h2 {
+            font-size: 24px;
+            margin-bottom: 10px;
+            color: #333;
+        }
+
+        .card p {
+            margin: 5px 0;
+            color: #555;
+        }
+
+        .inning-container {
+            margin-top: 20px;
+        }
+
+        .inning {
+            margin-bottom: 10px;
+        }
+
+        .inning h3 {
+            font-size: 18px;
+            margin-bottom: 5px;
+            color: #555;
+        }
+
+        .inning p {
+            margin: 0;
+            color: #777;
+        }
+    </style>
+</head>
+<body>
+ 
+    <div class="card-container" style="margin-left:50px;margin-right:50px;">
+        {% for match in data %}
+            <div class="card">
+                <h2>{{ match.name }}</h2>
+                <p>{{ match.type }} Match</p>
+                <p>{{ match.status }}</p>
+                <p>{{ match.venue }}</p>
+                <p style="font-weight: 900; font-size: 26px;">{{ match.status }}</p>
+                <div class="inning-container">
+                    {% for inning in match.innings %}
+                        <div class="inning">
+                            <h3>Inning{{ loop.index }}</h3>
+                            <p style="font-size: 16px;">{{ inning.team }}</p>
+                            <p style="font-weight: 900; font-size: 20px;">Score: {{ inning.run }}/{{ inning.wicket }} ({{ inning.over }} overs)</p>
+                        </div>
+                    {% endfor %}
+                </div>
+            </div>
+        {% endfor %}
+    </div>
+
+</body>
+</html>
